@@ -19,5 +19,5 @@
     "database": "araz_tdc_db",
     "host": "localhost",
     "dialect": "postgres" 
-  }
+  }  
 }

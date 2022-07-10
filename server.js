@@ -1,13 +1,16 @@
 // DEPENDENCIES
-const express = require('express')
-//const Sequelize = require('sequelize');
-const app = express()
+var express = require('express')
+var app = express()
+var bodyParser = require('body-parser')
 var cors = require('cors')
 
 // CONFIGURATION / MIDDLEWARE
 require('dotenv').config()
-app.use(express.json())
-app.use(express.urlencoded({ extended: false }))
+module.exports = function(app) {
+    app.use(bodyParser.json());
+    app.use(bodyParser.urlencoded({ extended: false }));
+    return app;
+};
 app.use(cors())
 
 // ROOT
@@ -17,9 +20,18 @@ app.get('/', (req, res) => {
     })
 })
 
-// CONTROLLERS 
-// const usersController = require('./controllers/user_account_controller')
-// app.use('/users', usersController)
+// CONTROLLERS
+const userHandleControllerPath = './controllers/user_handle_controller'
+const userHandleController = require(userHandleControllerPath)
+app.use('/handles', userHandleController)
+
+const inquestProjectControllerPath = './controllers/inquest_project_controller'
+const inquestProjectController = require(inquestProjectControllerPath)
+app.use('/inquests', inquestProjectController)
+
+const inquestArtifactControllerPath = './controllers/inquest_artifact_controller'
+const inquestArtifactController = require(inquestArtifactControllerPath)
+app.use('/artifacts', inquestArtifactController)
 
 // LISTEN
 app.listen(process.env.PORT, () => {
