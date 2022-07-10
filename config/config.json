@@ -1,0 +1,23 @@
+{
+  "development": {
+    "username": "postgres",
+    "password": "abc123",
+    "database": "araz_tdc_db",
+    "host": "localhost",
+    "dialect": "postgres"    
+  },
+  "test": {
+    "username": "postgres",
+    "password": "abc123",
+    "database": "araz_tdc_db",
+    "host": "localhost",
+    "dialect": "postgres"    
+  },
+  "production": {
+    "username": "postgres",
+    "password": "abc123",
+    "database": "araz_tdc_db",
+    "host": "localhost",
+    "dialect": "postgres" 
+  }
+}

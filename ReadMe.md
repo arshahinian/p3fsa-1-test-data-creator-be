@@ -7,39 +7,47 @@
 ### ORM / ODM USED
 * Sequelize
 * LINK TO WEBSITE: https://sequelize.org/
-### DATA BASE LOGICAL STRUCTURES
+### DATA BASE LOGICAL TABLE STRUCTURES
+*****
+| TABLE NAME     | TABLE DESCRIPTION  |
+|----------------|--------------------|
+| HANDLE         | APPLICATION USER   |
 
-* TABLE: HANDLE (APPLICATION USER)
+| COLUMN         | DATA TYPE | LENGTH | REQUIRED |
+|----------------|-----------|--------|----------|  
+| HANDLE_ID      | NUMBER    | N/A    | YES / PK |
+| HANDLE_NAME    | TEXT      | 255    | YES      |
+| LOGIN_CODE     | TEXT      | 255    | YES      |
+| PASSWORD       | TEXT      | 255    | YES      |
+| MODIFIED_DATE  | DATE      | N/A    | YES      |
+*****
+| TABLE NAME     | TABLE DESCRIPTION  |
+|----------------|--------------------|
+| INQUEST        | TEST PROJECT       |
 
-| COLUMN        | DATA TYPE | LENGTH | REQUIRED |
-|---------------|-----------|--------|----------|  
-| HANDLE_ID     | NUMBER    | N/A    | YES / PK |
-| HANDLE_NAME   | TEXT      | 250    | YES      |
-| LOGIN_CODE    | TEXT      | 250    | YES      |
-| PASSWORD      | TEXT      | 250    | YES      |
-| MODIFIED_DATE | DATE      | N/A    | YES      |
+| COLUMN         | DATA TYPE | LENGTH | REQUIRED |
+|----------------|-----------|--------|----------|  
+| INQUEST_ID     | NUMBER    | N/A    | YES / PK |
+| INQUEST_NAME   | TEXT      | 255    | YES      |
+| INQUEST_DESC   | TEXT      | 255    | NO       |
+| INQUEST_NOTE   | TEXT      | 255    | NO       |
+| MODIFIED_DATE  | DATE      | N/A    | YES      |
+| HANDLE_ID      | NUMBER    | N/A    | YES / FK |
+*****
+| TABLE NAME     | TABLE DESCRIPTION  |
+|----------------|--------------------|
+| ARTIFACT       | TEST DATA POINTS   |
 
-* TABLE: INQUEST (TEST PROJECT)
-
-| COLUMN        | DATA TYPE | LENGTH | REQUIRED |
-|---------------|-----------|--------|----------|  
-| INQUEST_ID    | NUMBER    | N/A    | YES / PK |
-| INQUEST_NAME  | TEXT      | 250    | YES      |
-| INQUEST_DESC  | TEXT      | 1000   | NO       |
-| INQUEST_NOTES | TEXT      | 2000   | NO       |
-| MODIFIED_DATE | DATE      | N/A    | YES      |
-| HANDLE_ID     | NUMBER    | N/A    | YES / FK |
-
-* TABLE: ARTIFACT (TEST DATA POINTS)
-
-| COLUMN        | DATA TYPE | LENGTH | REQUIRED |
-|---------------|-----------|--------|----------|  
-| ARTIFACT_ID   | NUMBER    | N/A    | YES / PK |
-| ARTIFACT_NAME | TEXT      | 250    | YES      |
-| ARTIFACT_TYPE | TEXT      | 50     | YES      |
-| ARTIFACT_VALUE| TEXT      | 2000   | NO       |
-| MODIFIED_DATE | DATE      | N/A    | YES      |
-| INQUEST_ID    | NUMBER    | N/A    | YES / FK |
+| COLUMN         | DATA TYPE | LENGTH | REQUIRED |
+|----------------|-----------|--------|----------|  
+| ARTIFACT_ID    | NUMBER    | N/A    | YES / PK |
+| ARTIFACT_NAME  | TEXT      | 255    | YES      |
+| ARTIFACT_TYPE  | TEXT      | 255    | YES      |
+| ARTIFACT_VALUE | TEXT      | 255    | NO       |
+| ARTIFACT_CODE  | TEXT      | 255    | NO       |
+| MODIFIED_DATE  | DATE      | N/A    | YES      |
+| INQUEST_ID     | NUMBER    | N/A    | YES / FK |
+*****
 
 ## PROJECT STATUS LOGS
 * CREATED READ ME FILE (07/05/2022)
