@@ -38,7 +38,7 @@ module.exports = (sequelize, DataTypes) => {
   }, {    
     sequelize,
     modelName: 'Handle',
-    tableName: 'handle',
+    tableName: 'handles',
     timestamps: false
   });
   return Handle;

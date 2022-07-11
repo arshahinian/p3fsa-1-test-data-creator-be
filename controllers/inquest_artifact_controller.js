@@ -1,6 +1,6 @@
 // DEPENDENCIES
 const inquestArtifact = require('express').Router()
-const db = require('../models/artifact')
+const db = require('../models')
 const { artifact  } = db
 const { Op } = require('sequelize')
 

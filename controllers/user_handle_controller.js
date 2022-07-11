@@ -1,13 +1,13 @@
 // DEPENDENCIES
 const userHandle = require('express').Router()
-const db = require('../models/handle')
-const { handle  } = db
+const db = require('../models')
+const { Handle } = db
 const { Op } = require('sequelize')
 
 // FIND ALL USER HANDLES
 userHandle.get('/', async (req, res) => {
     try {
-        const foundItem = await handle.findAll()
+        const foundItem = await Handle.findAll()
         res.status(200).json(foundItem)
     } catch (error) {
         res.status(500).json(error)
@@ -19,7 +19,7 @@ userHandle.get('/:handle_name', async (req, res) => {
     try {
         var handle_name = req.params.handle_name ? req.params.handle_name : '';
         console.log( `%${handle_name}%`)
-        const foundItem = await handle.findOne({
+        const foundItem = await Handle.findOne({
             where: 
                 { 
                     handle_name: { [Op.like]: `%${handle_name}%` }
@@ -34,14 +34,16 @@ userHandle.get('/:handle_name', async (req, res) => {
 // CREATE A USER HANDLE
 userHandle.post('/', async (req, res) => {
     try {
+        console.log('Pop Rocks');
         const reqBody = req.body;
         console.log(reqBody);
-        const newItem = await handle.create(req.body)
+        const newItem = await Handle.create(reqBody)
         res.status(200).json({
             message: 'The new user handle was created, successfully!',
             data: newItem
         })
     } catch(err) {
+        console.log(err)
         res.status(500).json(err)
     }
 })
@@ -49,7 +51,7 @@ userHandle.post('/', async (req, res) => {
 // UPDATE A USER HANDLE
 userHandle.put('/:handle_id', async (req, res) => {
     try {
-        const updatedItem = await handle.update(req.body, {
+        const updatedItem = await Handle.update(req.body, {
             where: {
                 handle_id: req.params.handle_id
             }
@@ -65,7 +67,7 @@ userHandle.put('/:handle_id', async (req, res) => {
 // DELETE A USER HANDLE
 userHandle.delete('/:handle_id', async (req, res) => {
     try {
-        const deletedItem = await handle.destroy({
+        const deletedItem = await Handle.destroy({
             where:
                 {
                     handle_id: req.params.handle_id

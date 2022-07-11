@@ -6,11 +6,8 @@ var cors = require('cors')
 
 // CONFIGURATION / MIDDLEWARE
 require('dotenv').config()
-module.exports = function(app) {
-    app.use(bodyParser.json());
-    app.use(bodyParser.urlencoded({ extended: false }));
-    return app;
-};
+app.use(express.json())
+app.use(express.urlencoded({ extended: false }))
 app.use(cors())
 
 // ROOT
