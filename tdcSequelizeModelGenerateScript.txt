@@ -2,4 +2,3 @@ sequelize model:generate --name handle --attributes "handle_id:integer, handle_n
 sequelize model:generate --name inquest --attributes "inquest_id:integer, inquest_name:string, inquest_desc:string, inquest_note:string, modified_date:date, handle_id:integer" --force true
 sequelize model:generate --name artifact --attributes "artifact_id:integer, artifact_name:string, artifact_type:string, artifact_value:string, artifact_code:string, modified_date:date, inquest_id:integer" --force true
 sequelize db:migrate
-"type": "module",

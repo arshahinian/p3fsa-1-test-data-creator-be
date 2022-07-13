@@ -2,15 +2,13 @@
 const {
   Model
 } = require('sequelize');
-module.exports = (sequelize, DataTypes) => {
-  class Artifact extends Model {
-    /**
-     * Helper method for defining associations.
-     * This method is not a part of Sequelize lifecycle.
-     * The `models/index` file will call this method automatically.
-     */
-    static associate(models) {
-      // define association here
+module.exports = (sequelize, DataTypes) => {  
+  class Artifact extends Model {    
+    static associate({Inquest}) {
+      Inquest.belongsTo(Inquest, {
+        foreignKey: "inquest_id",
+        as: "inquest"
+      })
     }
   }
   Artifact.init({

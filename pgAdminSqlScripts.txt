@@ -1,0 +1,9 @@
+ALTER TABLE inquests 
+ADD CONSTRAINT cc_inquest_handle_id 
+FOREIGN KEY (handle_id) 
+REFERENCES handles (handle_id);
+
+ALTER TABLE artifacts 
+ADD CONSTRAINT cc_artifact_inquest_id 
+FOREIGN KEY (inquest_id) 
+REFERENCES inquests (inquest_id);
