@@ -23,10 +23,12 @@ userHandle.get('/:handle_name', async (req, res) => {
             where: 
                 { 
                     handle_name: { [Op.like]: `%${handle_name}%` }
-                }            
+                }                   
         })
+        console.log( `foundItem: ${foundItem}`)
         res.status(200).json(foundItem)
     } catch (error) {
+        console.log( `error: ${error}`)
         res.status(500).json(error)
     }
 })
