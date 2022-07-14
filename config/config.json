@@ -1,23 +1,42 @@
 {
-  "development": {
-    "username": "postgres",
-    "password": "abc123",
-    "database": "araz_tdc_db",
-    "host": "localhost",
-    "dialect": "postgres"    
-  },
-  "test": {
-    "username": "postgres",
-    "password": "abc123",
-    "database": "araz_tdc_db",
-    "host": "localhost",
-    "dialect": "postgres"    
-  },
-  "production": {
-    "username": "postgres",
-    "password": "abc123",
-    "database": "araz_tdc_db",
-    "host": "localhost",
-    "dialect": "postgres" 
-  }  
-}
+    "development": {
+      "username": "bwknngnczckxwz",
+      "password": "eeb1f8ba410c86d7e791b110934f49207d32c9cab615ab6f2729401aff39b0a7",
+      "database": "dl05r41n0md2g",
+      "host": "ec2-3-217-14-181.compute-1.amazonaws.com",
+      "dialect": "postgres",
+      "dialectOptions":{ 
+        "ssl":{
+          "require":true,
+          "rejectUnauthorized":false
+        }
+      }
+    },
+    "test": {
+      "username": "bwknngnczckxwz",
+      "password": "eeb1f8ba410c86d7e791b110934f49207d32c9cab615ab6f2729401aff39b0a7",
+      "database": "dl05r41n0md2g",
+      "host": "ec2-3-217-14-181.compute-1.amazonaws.com",
+      "dialect": "postgres",
+      "dialectOptions":{ 
+        "ssl":{
+          "require":true,
+          "rejectUnauthorized":false
+        }
+      }   
+    },
+    "production": {
+      "username": "bwknngnczckxwz",
+      "password": "eeb1f8ba410c86d7e791b110934f49207d32c9cab615ab6f2729401aff39b0a7",
+      "database": "dl05r41n0md2g",
+      "host": "ec2-3-217-14-181.compute-1.amazonaws.com",
+      "dialect": "postgres",
+      "dialectOptions":{ 
+        "ssl":{
+          "require":true,
+          "rejectUnauthorized":false
+        }
+      }   
+    }
+  }
+  

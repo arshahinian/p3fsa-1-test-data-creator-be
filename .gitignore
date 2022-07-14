@@ -9,3 +9,4 @@ older_migrations
 old_pgAdminSqlScripts.txt
 old_sequelizeModelGenerateScript.txt
 old_server.js
+old_config.json
