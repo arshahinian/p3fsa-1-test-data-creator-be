@@ -1,13 +1,13 @@
 // DEPENDENCIES
 const inquestProject = require('express').Router()
 const db = require('../models')
-const { inquest  } = db
+const { Inquest  } = db
 const { Op } = require('sequelize')
 
 // FIND ALL INQUEST PROJECTS
 inquestProject.get('/', async (req, res) => {
     try {
-        const foundItem = await inquest.findAll()
+        const foundItem = await Inquest.findAll()
         res.status(200).json(foundItem)
     } catch (error) {
         res.status(500).json(error)
@@ -19,7 +19,7 @@ inquestProject.get('/:inquest_name', async (req, res) => {
     try {
         var inquest_name = req.params.inquest_name ? req.params.inquest_name : '';
         console.log( `%${inquest_name}%`)
-        const foundItem = await inquest.findOne({
+        const foundItem = await Inquest.findOne({
             where: 
                 { 
                     inquest_name: { [Op.like]: `%${inquest_name}%` }
@@ -36,7 +36,7 @@ inquestProject.post('/', async (req, res) => {
     try {
         const reqBody = req.body;
         console.log(reqBody);
-        const newItem = await inquest.create(req.body)
+        const newItem = await Inquest.create(req.body)
         res.status(200).json({
             message: 'The new inquest project was created, successfully!',
             data: newItem
@@ -49,7 +49,7 @@ inquestProject.post('/', async (req, res) => {
 // UPDATE AN INQUEST PROJECT
 inquestProject.put('/:inquest_id', async (req, res) => {
     try {
-        const updatedItem = await inquest.update(req.body, {
+        const updatedItem = await Inquest.update(req.body, {
             where: {
                 inquest_id: req.params.inquest_id
             }
@@ -65,7 +65,7 @@ inquestProject.put('/:inquest_id', async (req, res) => {
 // DELETE AN INQUEST PROJECT
 inquestProject.delete('/:inquest_id', async (req, res) => {
     try {
-        const deletedItem = await inquest.destroy({
+        const deletedItem = await Inquest.destroy({
             where:
                 {
                     inquest_id: req.params.inquest_id
