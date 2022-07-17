@@ -4,6 +4,56 @@ const db = require('../models')
 const { Inquest, Artifact } = db
 const { Op } = require('sequelize')
 
+function getCurrentDateText()
+  {
+      let today = new Date();
+      let year = parseInt(today.getFullYear());
+      let month = parseInt(today.getMonth()+ 1);
+      let day = parseInt(today.getDate());
+      let yearText = padZero(year);
+      let monthText = padZero(month);
+      let dayText = padZero(day);
+      let hour = parseInt(today.getHours());
+      let minute = parseInt(today.getMinutes());
+      let second = parseInt(today.getSeconds());
+      let hourText = padZero(hour);
+      let minuteText = padZero(minute);
+      let secondText = padZero(second);
+      let value = `${monthText}/${dayText}/${yearText} ${hourText}:${minuteText}:${secondText}`
+      return value;
+  }
+
+  function padZero(value)
+  {
+      if(parseInt(value) > 9)
+      {
+          return value.toString();
+      }
+      else
+      {
+          return `0${value.toString()}`.toString()
+      }    
+  }
+
+  function createArtifactRecord(reqBody)
+  {
+    const obj = JSON.parse(reqBody);
+    console.log(obj)
+    let artName = obj.inquest_name
+    let artType = "INQUEST"
+    let artValue = obj.inquest_desc
+    let artCode = obj.inquest_note
+    let artNameChunk = `artifact_name:${artName}`
+    let artTypeChunk = `artifact_type:${artType}`
+    let artValueChunk = `artifact_value:${artValue}`
+    let artCodeChunk = `artifact_code:${artCode}`
+    let modifiedDateChunk = `modified_date:${getCurrentDateText()}`
+    let inquestIdChunk = `inquest_id:${req.params.inquest_id}`
+    let artJson = `{${artNameChunk},${artTypeChunk},${artValueChunk},${artCodeChunk},${modifiedDateChunk},${inquestIdChunk}}`
+    console.log(artJson)
+    return artJson
+  }
+
 // FIND ALL INQUEST PROJECTS
 inquestProject.get('/', async (req, res) => {
     try {
@@ -38,18 +88,7 @@ inquestProject.post('/', async (req, res) => {
         console.log(reqBody);
         const newItem = await Inquest.create(req.body)
 
-        const obj = JSON.parse(req.body);
-        console.log(obj)
-        let artName = obj.inquest_name
-        let artType = "INQUEST"
-        let artValue = obj.inquest_desc
-        let artCode = obj.inquest_note
-        let artNameChunk = `artifact_name:${artName}`
-        let artTypeChunk = `artifact_type:${artType}`
-        let artValueChunk = `artifact_value:${artValue}`
-        let artCodeChunk = `artifact_code:${artCode}`
-        let inquestIdChunk = `inquest_id:${req.params.inquest_id}`
-        let artJson = `{${artNameChunk},${artTypeChunk},${artValueChunk},${artCodeChunk},${inquestIdChunk}}`
+        let artJson =createArtifactRecord(req.body)
         console.log(artJson)
         const newArtifact = await Artifact.create(artJson)
 
@@ -71,18 +110,7 @@ inquestProject.put('/:inquest_id', async (req, res) => {
             }
         })
         
-        const obj = JSON.parse(req.body);
-        console.log(obj)
-        let artName = obj.inquest_name
-        let artType = "INQUEST"
-        let artValue = obj.inquest_desc
-        let artCode = obj.inquest_note
-        let artNameChunk = `artifact_name:${artName}`
-        let artTypeChunk = `artifact_type:${artType}`
-        let artValueChunk = `artifact_value:${artValue}`
-        let artCodeChunk = `artifact_code:${artCode}`
-        let inquestIdChunk = `inquest_id:${req.params.inquest_id}`
-        let artJson = `{${artNameChunk},${artTypeChunk},${artValueChunk},${artCodeChunk},${inquestIdChunk}}`
+        let artJson =createArtifactRecord(req.body)
         console.log(artJson)
         const newArtifact = await Artifact.create(artJson)
 
