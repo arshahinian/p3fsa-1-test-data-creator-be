@@ -35,12 +35,12 @@ function getCurrentDateText()
       }    
   }
 
-  function createArtifactRecord(reqBody)
+  function createArtifactRecord(reqBody,artifactType)
   {
     const obj = JSON.parse(reqBody);
     console.log(obj)
     let artName = obj.inquest_name
-    let artType = "INQUEST"
+    let artType = artifactType
     let artValue = obj.inquest_desc
     let artCode = obj.inquest_note
     let artNameChunk = `artifact_name:${artName}`
@@ -88,7 +88,7 @@ inquestProject.post('/', async (req, res) => {
         console.log(reqBody);
         const newItem = await Inquest.create(req.body)
 
-        let artJson =createArtifactRecord(req.body)
+        let artJson = createArtifactRecord(req.body,'INQUEST_CREATE')
         console.log(artJson)
         const newArtifact = await Artifact.create(artJson)
 
@@ -110,7 +110,7 @@ inquestProject.put('/:inquest_id', async (req, res) => {
             }
         })
         
-        let artJson =createArtifactRecord(req.body)
+        let artJson = createArtifactRecord(req.body,'INQUEST_UPDATE')
         console.log(artJson)
         const newArtifact = await Artifact.create(artJson)
 
