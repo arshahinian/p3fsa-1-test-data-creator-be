@@ -38,14 +38,11 @@ function getCurrentDateText()
   function createArtifactRecord(reqBody,artifactType,id)
   {
     try{
-        console.log(reqBody)
-        let obj = JSON.parse(reqBody);
-        console.log('obj')
-        console.log(obj)
-        let artName = obj.inquest_name
-            let artType = artifactType
-        let artValue = obj.inquest_desc
-        let artCode = obj.inquest_note
+               
+        let artName = reqBody.inquest_name
+        let artType = artifactType
+        let artValue = reqBody.inquest_desc
+        let artCode = reqBody.inquest_note
         let currentDateText = `modified_date:${getCurrentDateText()}`
         let artJson = {artifact_name:artName
         ,artifact_type:artType
