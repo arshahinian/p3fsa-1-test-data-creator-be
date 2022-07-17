@@ -107,10 +107,7 @@ inquestProject.post('/', async (req, res) => {
             console.log(newArtifact)
         }   
 
-        res.status(200).json({
-            message: `The new inquest project was created, successfully! New artifact ${newArtifact}!`
-            ,data: newItem
-        })
+        res.status(200).json(newItem)
     } catch(err) {
         res.status(500).json(err)
     }
@@ -138,9 +135,7 @@ inquestProject.put('/:inquest_id', async (req, res) => {
             console.log(newArtifact)
         }   
 
-        res.status(200).json({
-            message: `Successfully updated ${updatedItem} inquest project! New artifact ${newArtifact}!`
-        })        
+        res.status(200).json(updatedItem)        
     } catch(err) {
         res.status(500).json(err)
     }
@@ -155,9 +150,7 @@ inquestProject.delete('/:inquest_id', async (req, res) => {
                     inquest_id: req.params.inquest_id
                 }
         })
-        res.status(200).json({
-            message: `Successfully deleted ${deletedItem} inquest project!`
-        })
+        res.status(200).json(deletedItem)
     } catch(err) {
         res.status(500).json(err)
     }

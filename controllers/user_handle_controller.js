@@ -40,10 +40,7 @@ userHandle.post('/', async (req, res) => {
         const reqBody = req.body;
         console.log(reqBody);
         const newItem = await Handle.create(reqBody)
-        res.status(200).json({
-            message: 'The new user handle was created, successfully!',
-            data: newItem
-        })
+        res.status(200).json(newItem)
     } catch(err) {
         console.log(err)
         res.status(500).json(err)
@@ -58,9 +55,7 @@ userHandle.put('/:handle_id', async (req, res) => {
                 handle_id: req.params.handle_id
             }
         })
-        res.status(200).json({
-            message: `Successfully updated ${updatedItem} user handle!`
-        })
+        res.status(200).json(updatedItem)
     } catch(err) {
         res.status(500).json(err)
     }
@@ -75,9 +70,7 @@ userHandle.delete('/:handle_id', async (req, res) => {
                     handle_id: req.params.handle_id
                 }
         })
-        res.status(200).json({
-            message: `Successfully deleted ${deletedItem} user handle!`
-        })
+        res.status(200).json(deletedItem)
     } catch(err) {
         res.status(500).json(err)
     }
