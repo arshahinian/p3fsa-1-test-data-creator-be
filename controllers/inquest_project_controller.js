@@ -35,7 +35,7 @@ function getCurrentDateText()
       }    
   }
 
-  function createArtifactRecord(reqBody,artifactType)
+  function createArtifactRecord(reqBody,artifactType,id)
   {
     const obj = JSON.parse(reqBody);
     console.log(obj)
@@ -43,13 +43,14 @@ function getCurrentDateText()
     let artType = artifactType
     let artValue = obj.inquest_desc
     let artCode = obj.inquest_note
-    let artNameChunk = `artifact_name:${artName}`
-    let artTypeChunk = `artifact_type:${artType}`
-    let artValueChunk = `artifact_value:${artValue}`
-    let artCodeChunk = `artifact_code:${artCode}`
-    let modifiedDateChunk = `modified_date:${getCurrentDateText()}`
-    let inquestIdChunk = `inquest_id:${req.params.inquest_id}`
-    let artJson = `{${artNameChunk},${artTypeChunk},${artValueChunk},${artCodeChunk},${modifiedDateChunk},${inquestIdChunk}}`
+    let currentDateText = `modified_date:${getCurrentDateText()}`
+    let artJson = {artifact_name:artName
+        ,artifact_type:artType
+        ,artifact_value:artValue
+        ,artifact_code: artCode
+        ,modified_date: currentDateText
+        ,inquest_id: id
+    }
     console.log(artJson)
     return artJson
   }
@@ -88,7 +89,7 @@ inquestProject.post('/', async (req, res) => {
         console.log(reqBody);
         const newItem = await Inquest.create(req.body)
         console.log('artJson')
-        let artJson = createArtifactRecord(req.body,'INQUEST_CREATE')
+        let artJson = createArtifactRecord(req.body,'INQUEST_CREATE',newItem.inquest_id)
         console.log(artJson)
         const newArtifact = await Artifact.create(artJson)
 
@@ -110,7 +111,7 @@ inquestProject.put('/:inquest_id', async (req, res) => {
             }
         })
         console.log('artJson')
-        let artJson = createArtifactRecord(req.body,'INQUEST_UPDATE')
+        let artJson = createArtifactRecord(req.body,'INQUEST_UPDATE',req.params.inquest_id)
         console.log(artJson)
         const newArtifact = await Artifact.create(artJson)
 
