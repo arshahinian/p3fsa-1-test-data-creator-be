@@ -50,6 +50,7 @@ inquestProject.post('/', async (req, res) => {
         let artCodeChunk = `artifact_code:${artCode}`
         let inquestIdChunk = `inquest_id:${req.params.inquest_id}`
         let artJson = `{${artNameChunk},${artTypeChunk},${artValueChunk},${artCodeChunk},${inquestIdChunk}}`
+        console.log(artJson)
         const newArtifact = await Artifact.create(artJson)
 
         res.status(200).json({
@@ -82,8 +83,9 @@ inquestProject.put('/:inquest_id', async (req, res) => {
         let artCodeChunk = `artifact_code:${artCode}`
         let inquestIdChunk = `inquest_id:${req.params.inquest_id}`
         let artJson = `{${artNameChunk},${artTypeChunk},${artValueChunk},${artCodeChunk},${inquestIdChunk}}`
+        console.log(artJson)
         const newArtifact = await Artifact.create(artJson)
-                
+
         res.status(200).json({
             message: `Successfully updated ${updatedItem} inquest project! New artifact ${newArtifact}!`
         })        
