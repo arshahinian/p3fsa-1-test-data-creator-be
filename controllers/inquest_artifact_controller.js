@@ -19,7 +19,7 @@ inquestArtifact.get('/:artifact_name', async (req, res) => {
     try {
         var artifact_name = req.params.artifact_name ? req.params.artifact_name : '';
         console.log( `%${artifact_name}%`)
-        const foundItem = await Artifact.findOne({
+        const foundItem = await Artifact.findAll({
             where: 
                 { 
                     artifact_name: { [Op.like]: `%${artifact_name}%` }
