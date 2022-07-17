@@ -87,7 +87,7 @@ inquestProject.post('/', async (req, res) => {
         const reqBody = req.body;
         console.log(reqBody);
         const newItem = await Inquest.create(req.body)
-
+        console.log('artJson')
         let artJson = createArtifactRecord(req.body,'INQUEST_CREATE')
         console.log(artJson)
         const newArtifact = await Artifact.create(artJson)
@@ -109,7 +109,7 @@ inquestProject.put('/:inquest_id', async (req, res) => {
                 inquest_id: req.params.inquest_id
             }
         })
-        
+        console.log('artJson')
         let artJson = createArtifactRecord(req.body,'INQUEST_UPDATE')
         console.log(artJson)
         const newArtifact = await Artifact.create(artJson)
