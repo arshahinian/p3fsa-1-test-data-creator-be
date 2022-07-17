@@ -43,7 +43,7 @@ function getCurrentDateText()
         let artType = artifactType
         let artValue = reqBody.inquest_desc
         let artCode = reqBody.inquest_note
-        let currentDateText = `modified_date:${getCurrentDateText()}`
+        let currentDateText = getCurrentDateText()
         let artJson = {artifact_name:artName
         ,artifact_type:artType
         ,artifact_value:artValue
