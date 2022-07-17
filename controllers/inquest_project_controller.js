@@ -52,13 +52,14 @@ function getCurrentDateText()
         ,inquest_id: id
         }
         console.log(artJson)
+        return artJson
     }
     catch(error)
     {
         console.log(error)
-    }
+        return null
+    } 
     
-    return artJson
   }
 
 // FIND ALL INQUEST PROJECTS
@@ -100,7 +101,11 @@ inquestProject.post('/', async (req, res) => {
         console.log(inquestId)
         let artJson = createArtifactRecord(reqBody,'INQUEST_CREATE',inquestId)
         console.log(artJson)
-        const newArtifact = await Artifact.create(artJson)
+        if(artJson)
+        {
+            const newArtifact = await Artifact.create(artJson)
+            console.log(newArtifact)
+        }   
 
         res.status(200).json({
             message: `The new inquest project was created, successfully! New artifact ${newArtifact}!`
@@ -115,16 +120,23 @@ inquestProject.post('/', async (req, res) => {
 inquestProject.put('/:inquest_id', async (req, res) => {
     try {
         const reqBody = req.body;
+        let inquestId = req.params.inquest_id
+        console.log(inquestId)
         const updatedItem = await Inquest.update(reqBody, {
             where: {
-                inquest_id: req.params.inquest_id
+                inquest_id: inquestId
             }
-        })
+        })        
         console.log(updatedItem)
         console.log('artJson')
-        let artJson = createArtifactRecord(reqBody,'INQUEST_UPDATE',req.params.inquest_id)
+        
+        let artJson = createArtifactRecord(reqBody,'INQUEST_UPDATE',inquestId)
         console.log(artJson)
-        const newArtifact = await Artifact.create(artJson)
+        if(artJson)
+        {
+            const newArtifact = await Artifact.create(artJson)
+            console.log(newArtifact)
+        }   
 
         res.status(200).json({
             message: `Successfully updated ${updatedItem} inquest project! New artifact ${newArtifact}!`
