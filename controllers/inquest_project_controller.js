@@ -39,16 +39,18 @@ inquestProject.post('/', async (req, res) => {
         const newItem = await Inquest.create(req.body)
 
         const obj = JSON.parse(req.body);
+        console.log(obj)
         let artName = obj.inquest_name
         let artType = "INQUEST"
         let artValue = obj.inquest_desc
         let artCode = obj.inquest_note
         let artNameChunk = `artifact_name:${artName}`
-        let artTypeChunk = `artifact_name:${artType}`
-        let artValueChunk = `artifact_name:${artValue}`
-        let artCodeChunk = `artifact_name:${artCode}`
+        let artTypeChunk = `artifact_type:${artType}`
+        let artValueChunk = `artifact_value:${artValue}`
+        let artCodeChunk = `artifact_code:${artCode}`
         let inquestIdChunk = `inquest_id:${req.params.inquest_id}`
-        const newArtifact = await Artifact.create(`{${artNameChunk},${artTypeChunk},${artValueChunk},${artCodeChunk},${inquestIdChunk}}`)
+        let artJson = `{${artNameChunk},${artTypeChunk},${artValueChunk},${artCodeChunk},${inquestIdChunk}}`
+        const newArtifact = await Artifact.create(artJson)
 
         res.status(200).json({
             message: `The new inquest project was created, successfully! New artifact ${newArtifact}!`
@@ -69,17 +71,19 @@ inquestProject.put('/:inquest_id', async (req, res) => {
         })
         
         const obj = JSON.parse(req.body);
+        console.log(obj)
         let artName = obj.inquest_name
         let artType = "INQUEST"
         let artValue = obj.inquest_desc
         let artCode = obj.inquest_note
         let artNameChunk = `artifact_name:${artName}`
-        let artTypeChunk = `artifact_name:${artType}`
-        let artValueChunk = `artifact_name:${artValue}`
-        let artCodeChunk = `artifact_name:${artCode}`
+        let artTypeChunk = `artifact_type:${artType}`
+        let artValueChunk = `artifact_value:${artValue}`
+        let artCodeChunk = `artifact_code:${artCode}`
         let inquestIdChunk = `inquest_id:${req.params.inquest_id}`
-        const newArtifact = await Artifact.create(`{${artNameChunk},${artTypeChunk},${artValueChunk},${artCodeChunk},${inquestIdChunk}}`)
-        
+        let artJson = `{${artNameChunk},${artTypeChunk},${artValueChunk},${artCodeChunk},${inquestIdChunk}}`
+        const newArtifact = await Artifact.create(artJson)
+                
         res.status(200).json({
             message: `Successfully updated ${updatedItem} inquest project! New artifact ${newArtifact}!`
         })        
