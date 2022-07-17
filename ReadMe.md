@@ -48,6 +48,9 @@
 | MODIFIED_DATE  | DATE      | N/A    | YES      |
 | INQUEST_ID     | NUMBER    | N/A    | YES / FK |
 *****
-
+### TABLE RELATIONSHIPS
+* [HANDLE TABLE] has a ONE to MANY relationship with [INQUEST TABLE]
+* [INQUEST TABLE] has a ONE to MANY relationship with [ARTIFACT TABLE]
 ## PROJECT STATUS LOGS
 * CREATED READ ME FILE (07/05/2022)
+* UPDATED READ ME FILE (07/17/2022)
