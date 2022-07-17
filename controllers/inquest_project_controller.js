@@ -37,7 +37,9 @@ function getCurrentDateText()
 
   function createArtifactRecord(reqBody,artifactType,id)
   {
-    const obj = JSON.parse(reqBody);
+    console.log(reqBody)
+    let obj = JSON.parse(reqBody);
+    console.log('obj')
     console.log(obj)
     let artName = obj.inquest_name
     let artType = artifactType
