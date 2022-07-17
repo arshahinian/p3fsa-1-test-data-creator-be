@@ -1,7 +1,7 @@
 // DEPENDENCIES
 const inquestProject = require('express').Router()
 const db = require('../models')
-const { Inquest  } = db
+const { Inquest, Artifact } = db
 const { Op } = require('sequelize')
 
 // FIND ALL INQUEST PROJECTS
@@ -37,9 +37,22 @@ inquestProject.post('/', async (req, res) => {
         const reqBody = req.body;
         console.log(reqBody);
         const newItem = await Inquest.create(req.body)
+
+        const obj = JSON.parse(req.body);
+        let artName = obj.inquest_name
+        let artType = "INQUEST"
+        let artValue = obj.inquest_desc
+        let artCode = obj.inquest_note
+        let artNameChunk = `artifact_name:${artName}`
+        let artTypeChunk = `artifact_name:${artType}`
+        let artValueChunk = `artifact_name:${artValue}`
+        let artCodeChunk = `artifact_name:${artCode}`
+        let inquestIdChunk = `inquest_id:${req.params.inquest_id}`
+        const newArtifact = await Artifact.create(`{${artNameChunk},${artTypeChunk},${artValueChunk},${artCodeChunk},${inquestIdChunk}}`)
+
         res.status(200).json({
-            message: 'The new inquest project was created, successfully!',
-            data: newItem
+            message: `The new inquest project was created, successfully! New artifact ${newArtifact}!`
+            ,data: newItem
         })
     } catch(err) {
         res.status(500).json(err)
@@ -54,9 +67,22 @@ inquestProject.put('/:inquest_id', async (req, res) => {
                 inquest_id: req.params.inquest_id
             }
         })
+        
+        const obj = JSON.parse(req.body);
+        let artName = obj.inquest_name
+        let artType = "INQUEST"
+        let artValue = obj.inquest_desc
+        let artCode = obj.inquest_note
+        let artNameChunk = `artifact_name:${artName}`
+        let artTypeChunk = `artifact_name:${artType}`
+        let artValueChunk = `artifact_name:${artValue}`
+        let artCodeChunk = `artifact_name:${artCode}`
+        let inquestIdChunk = `inquest_id:${req.params.inquest_id}`
+        const newArtifact = await Artifact.create(`{${artNameChunk},${artTypeChunk},${artValueChunk},${artCodeChunk},${inquestIdChunk}}`)
+        
         res.status(200).json({
-            message: `Successfully updated ${updatedItem} inquest project!`
-        })
+            message: `Successfully updated ${updatedItem} inquest project! New artifact ${newArtifact}!`
+        })        
     } catch(err) {
         res.status(500).json(err)
     }
